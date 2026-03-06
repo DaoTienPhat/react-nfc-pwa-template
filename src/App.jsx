@@ -37,7 +37,7 @@ export default function App() {
 
       reader.onreading = (event)=>{
 
-        const uid = event.serialNumber
+        const uid = String(event.serialNumber).toUpperCase()
         console.log("Tag detected with UID:", uid)
         setScanned(uid)
         const asset = tagMap[uid]
