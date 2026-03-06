@@ -4,6 +4,7 @@ import { useRef, useState } from "react"
 export default function App() {
   const [img,setImg] = useState("/assets/default.jpg")
   const [enabled,setEnabled] = useState(false)
+  const [scanned,setScanned] = useState('')
 
   const audioRef = useRef(null)
   const wakeLock = useRef(null)
@@ -38,6 +39,7 @@ export default function App() {
 
         const uid = event.serialNumber
         console.log("Tag detected with UID:", uid)
+        setScanned(uid)
         const asset = tagMap[uid]
 
         if(!asset) return
@@ -66,9 +68,10 @@ export default function App() {
           Enable NFC Kiosk Mode
         </button>
       )}
-	  <link rel="preload" href="/assets/apple.png" as="image" />
-	  <link rel="preload" href="/assets/banana.png" as="image" />
-
+      <link rel="preload" href="/assets/apple.png" as="image" />
+      <link rel="preload" href="/assets/banana.png" as="image" />
+      <link rel="preload" href="/assets/akatsuki.png" as="image" />
+      <div>{scanned}</div>
       <img src={img} className="display"/>
 
       <audio ref={audioRef}/>
