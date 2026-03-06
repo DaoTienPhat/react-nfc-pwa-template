@@ -38,7 +38,6 @@ export default function App() {
         audioRef.current.play()
 
         setVideoSrc(asset.video || "")
-
       }
 
       setEnabled(true)
