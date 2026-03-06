@@ -27,7 +27,7 @@ export default function App() {
 
         const uid = String(event.serialNumber).toUpperCase()
         console.log("Tag detected with UID:", uid)
-        const asset = tagMap[uid]
+        const asset = tagMap[uid] || tagMap["DEFAULT"]
 
         if (!asset) return
         setScanned(`${uid} - ${asset.title || "Unknown Asset"}`)
