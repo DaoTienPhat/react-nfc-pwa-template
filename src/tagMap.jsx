@@ -15,7 +15,13 @@ const tagMap = {
 	},
 	"04:10:EE:1E:19:61:80": {
 		title: "Dark Magician",
-		img: "/assets/apple.png",
+		img: "/assets/dark-magician.png",
+		audio: "/audio/yugioh-001.mp3",
+		video: "/video/dark-magician.mp4"
+	},
+	"DEFAULT": {
+		title: "Default Asset",
+		img: "/assets/blue-eye.png",
 		audio: "/audio/yugioh-001.mp3",
 		video: "/video/blue-eye.mp4"
 	}
