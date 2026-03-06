@@ -2,9 +2,9 @@
 import { useRef, useState } from "react"
 
 export default function App() {
-  const [img,setImg] = useState("/assets/default.jpg")
+  const [img,setImg] = useState("/assets/default.png")
   const [enabled,setEnabled] = useState(false)
-  const [scanned,setScanned] = useState('')
+  const [scanned,setScanned] = useState('default text')
 
   const audioRef = useRef(null)
   const wakeLock = useRef(null)
@@ -62,7 +62,6 @@ export default function App() {
 
   return (
     <div className="app">
-
       {!enabled && (
         <button className="start" onClick={startKiosk}>
           Enable NFC Kiosk Mode
@@ -71,7 +70,9 @@ export default function App() {
       <link rel="preload" href="/assets/apple.png" as="image" />
       <link rel="preload" href="/assets/banana.png" as="image" />
       <link rel="preload" href="/assets/akatsuki.png" as="image" />
-      <div>{scanned}</div>
+
+      <div style={{width: "100vw"}}>{scanned}</div>
+
       <img src={img} className="display"/>
 
       <audio ref={audioRef}/>
