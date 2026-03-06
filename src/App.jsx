@@ -3,6 +3,8 @@ import { useRef, useState } from "react"
 
 export default function App() {
   const [img,setImg] = useState("/assets/default.png")
+  const [videoSrc, setVideoSrc] = useState("")
+
   const [enabled,setEnabled] = useState(false)
   const [scanned,setScanned] = useState('default text')
 
@@ -20,7 +22,8 @@ export default function App() {
     },
     "1D:17:B0:D8:0A:10:80": {
       img: "/assets/akatsuki.png",
-      audio: "/audio/yugioh-001.mp3"
+      audio: "/audio/yugioh-001.mp3",
+      video: "/video/placeholder.mp4"
     }
   }
 
@@ -49,6 +52,8 @@ export default function App() {
         audioRef.current.src = asset.audio
         audioRef.current.play()
 
+        setVideoSrc(asset.video || "")
+
       }
 
       setEnabled(true)
@@ -67,15 +72,22 @@ export default function App() {
           Enable NFC Kiosk Mode
         </button>
       )}
-      <link rel="preload" href="/assets/apple.png" as="image" />
-      <link rel="preload" href="/assets/banana.png" as="image" />
-      <link rel="preload" href="/assets/akatsuki.png" as="image" />
 
       <div style={{width: "100vw"}}>{scanned}</div>
 
-      <img src={img} className="display"/>
-
       <audio ref={audioRef}/>
+      {videoSrc ? (
+        <video
+          key={videoSrc}
+          src={videoSrc}
+          autoPlay
+          muted
+          playsInline
+          style={{ width:"100vw", height:"100vh", objectFit:"contain"}}
+        />
+      ):      
+       <img style={{ display: "none"}} src={img} className="display"/>
+      }
 
     </div>
   )
