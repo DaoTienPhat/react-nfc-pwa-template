@@ -13,7 +13,7 @@ const tagMap = {
 		audio: "/audio/yugioh-001.mp3",
 		video: "/video/placeholder.mp4"
 	},
-	"D4:10:EE:1E:19:61:80": {
+	"04:10:EE:1E:19:61:80": {
 		title: "Dark Magician",
 		img: "/assets/apple.png",
 		audio: "/audio/yugioh-001.mp3",
