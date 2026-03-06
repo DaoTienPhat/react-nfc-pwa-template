@@ -18,7 +18,7 @@ export default function App() {
       img: "/assets/banana.png",
       audio: "/audio/banana.mp3"
     },
-    "1D:17:B0:0A:10:80": {
+    "1D:17:B0:D8:0A:10:80": {
       img: "/assets/akatsuki.png",
       audio: "/audio/yugioh-001.mp3"
     }
