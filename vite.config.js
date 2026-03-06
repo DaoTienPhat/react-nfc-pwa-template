@@ -9,8 +9,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'NFC Scanner',
-        short_name: 'NFCScan',
+        name: 'Rider B-Scanner',
+        short_name: 'Rider B-Scanner',
         start_url: '/',
         display: 'standalone',
         background_color: '#000000',
