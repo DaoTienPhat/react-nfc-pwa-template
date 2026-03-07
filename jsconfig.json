@@ -1,11 +1,9 @@
 {
-	"compilerOptions": {
-		"module": "esnext",
-		"moduleResolution": "bundler",
-		"jsx": "react-jsx",
-		"baseUrl": "."
-	},
-	"include": [
-		"src"
-	]
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "baseUrl": "."
+  },
+  "include": ["src"]
 }
