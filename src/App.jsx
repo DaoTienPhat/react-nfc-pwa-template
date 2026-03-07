@@ -42,29 +42,29 @@ export default function App() {
 
   return (
     <div className="app row">
-      <div class="row">
+      <div className="row">
         <button
           className="btn btn-gray"
           onClick={backHome}>
           CLEAR
         </button>
         {!enabled && (
-          <button class="btn btn-blue"
+          <button className="btn btn-blue"
             onClick={startKiosk}>
             Enable NFC Kiosk Mode
           </button>
         )}
       </div>
       {!enabled && (
-        <div class="row w-72">
+        <div className="row w-72">
           <input
             type="text"
             value={uidFromInput}
             onChange={handleTyping}
             placeholder="Card UID"
-            class="input border py-1"
+            className="input border py-1"
           />
-          <button class="btn btn-gray" onClick={submitCard}> Try </button>
+          <button className="btn btn-gray" onClick={submitCard}> Try </button>
         </div>
       )}
 

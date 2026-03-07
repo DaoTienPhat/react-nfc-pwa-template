@@ -1,6 +1,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { tagMap } from "src/tagMap.jsx";
+import { buildVercelUrl } from "src/utils/VercelUrlBuilder.jsx";
 
 const MainDisplay = ({ cardUid }) => {
 	const [img, setImg] = useState("/assets/default.png")
@@ -18,15 +19,15 @@ const MainDisplay = ({ cardUid }) => {
 		}
 		const asset = tagMap[cardUid.toUpperCase()] || tagMap["DEFAULT"]
 		setScanned(`${cardUid} - ${asset.title}`);
-		setImg(asset.img)
-		audioRef.current.src = asset.audio
-		audioRef.current.play()
-		setVideoSrc(asset.video || "")
+		setImg(buildVercelUrl(asset.img))
+		audioRef.current.src = buildVercelUrl(asset.audio);
+		audioRef.current.play();
+		setVideoSrc(buildVercelUrl(asset.video) || "");
 	}, [cardUid]);
 
 	return (
 		<>
-			<div class="w-90 text-center">{scanned}</div>
+			<div className="w-90 text-center">{scanned}</div>
 			<audio ref={audioRef} />
 			{videoSrc ? (
 				<video
