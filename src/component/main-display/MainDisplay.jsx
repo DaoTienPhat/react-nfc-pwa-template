@@ -26,7 +26,7 @@ const MainDisplay = ({ cardUid }) => {
 
 	return (
 		<>
-			<div style={{ width: "100vw" }}>{scanned}</div>
+			<div class="w-90 text-center">{scanned}</div>
 			<audio ref={audioRef} />
 			{videoSrc ? (
 				<video

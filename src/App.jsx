@@ -4,6 +4,7 @@ import MainDisplay from "./component/main-display/MainDisplay";
 export default function App() {
   const [enabled, setEnabled] = useState(false);
   const [cardUid, setCardUid] = useState(undefined);
+  const [uidFromInput, setUidFromInput] = useState("");
 
   const wakeLock = useRef(null);
 
@@ -29,11 +30,19 @@ export default function App() {
 
   function backHome() {
     setCardUid(undefined);
+    setUidFromInput("");
   }
 
+  const submitCard = () => {
+    setCardUid(uidFromInput.trim().toUpperCase());
+  };
+  const handleTyping = (e) => {
+    setUidFromInput(e.target.value);
+  };
+
   return (
-    <div className="app">
-      <div className="row">
+    <div className="app row">
+      <div class="row">
         <button
           className="btn btn-gray"
           onClick={backHome}>
@@ -46,6 +55,19 @@ export default function App() {
           </button>
         )}
       </div>
+      {!enabled && (
+        <div class="row w-72">
+          <input
+            type="text"
+            value={uidFromInput}
+            onChange={handleTyping}
+            placeholder="Card UID"
+            class="input border py-1"
+          />
+          <button class="btn btn-gray" onClick={submitCard}> Try </button>
+        </div>
+      )}
+
       <MainDisplay cardUid={cardUid} />
     </div>
   );
