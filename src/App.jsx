@@ -5,8 +5,15 @@ export default function App() {
   const [enabled, setEnabled] = useState(false);
   const [cardUid, setCardUid] = useState(undefined);
   const [uidFromInput, setUidFromInput] = useState("");
-
+  const scannedSfx = useRef(null)
   const wakeLock = useRef(null);
+
+  const playScannedSfx = () => {
+    if (scannedSfx.current) {
+      scannedSfx.current.currentTime = 0;
+      scannedSfx.current.play();
+    }
+  };
 
   async function startKiosk() {
     try {
@@ -17,6 +24,7 @@ export default function App() {
       await reader.scan();
 
       reader.onreading = (event) => {
+        playScannedSfx();
         const uid = String(event.serialNumber).toUpperCase();
         console.log("Tag detected with UID:", uid);
         setCardUid(uid);
@@ -42,6 +50,7 @@ export default function App() {
 
   return (
     <div className="app row">
+      <audio ref={scannedSfx} src="/sfx/zero-one.mp3" preload="auto" />
       <div className="row">
         <button
           className="btn btn-gray"
