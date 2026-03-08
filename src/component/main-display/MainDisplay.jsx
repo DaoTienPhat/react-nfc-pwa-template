@@ -1,6 +1,7 @@
 
 import { useEffect, useRef, useState } from "react";
-import { tagMap } from "src/tagMap.jsx";
+import getTagMapUrl from "src/api/TagMap/getTagMap";
+import { tagMap } from "src/tagMap";
 import { buildVercelUrl } from "src/utils/VercelUrlBuilder.jsx";
 
 const MainDisplay = ({ cardUid }) => {
@@ -8,8 +9,19 @@ const MainDisplay = ({ cardUid }) => {
 	const [videoSrc, setVideoSrc] = useState("")
 	const audioRef = useRef(null)
 	const [scanned, setScanned] = useState("No card scanned");
+	const [tagMapData, setTagMapData] = useState([]);
 
 	useEffect(() => {
+		fetch(getTagMapUrl).then(res => res.json())
+			.then((data) => {
+				console.log('Mapping fetched:', data);
+				setTagMapData(data);
+			}).catch((reason) => console.log('Fetch mapping error:', reason));
+	}, [setTagMapData]);
+
+	useEffect(() => {
+		if (!tagMapData) return;
+		console.log('tag map data loaded: ', tagMapData, tagMapData["HOMEPAGE"]);
 		if (!cardUid) {
 			setImg(tagMap["HOMEPAGE"].img)
 			setScanned("No card scanned");
@@ -17,13 +29,15 @@ const MainDisplay = ({ cardUid }) => {
 			audioRef.current.pause();
 			return;
 		}
-		const asset = tagMap[cardUid.toUpperCase()] || tagMap["DEFAULT"]
+		const asset = tagMapData[cardUid.toUpperCase()] || tagMapData["DEFAULT"]
 		setScanned(`${cardUid} - ${asset.title}`);
-		setImg(buildVercelUrl(asset.img))
-		audioRef.current.src = buildVercelUrl(asset.audio);
-		audioRef.current.play();
-		setVideoSrc(buildVercelUrl(asset.video) || "");
-	}, [cardUid]);
+		asset.img && setImg(buildVercelUrl(asset.img));
+		if (asset.audio) {
+			audioRef.current.src = buildVercelUrl(asset.audio);
+			audioRef.current.play();
+		}
+		asset.video && setVideoSrc(buildVercelUrl(asset.video) || "");
+	}, [cardUid, tagMapData]);
 
 	return (
 		<>

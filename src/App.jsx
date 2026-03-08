@@ -5,7 +5,7 @@ export default function App() {
   const [enabled, setEnabled] = useState(false);
   const [cardUid, setCardUid] = useState(undefined);
   const [uidFromInput, setUidFromInput] = useState("");
-  const scannedSfx = useRef(null)
+  const scannedSfx = useRef(null);
   const wakeLock = useRef(null);
 
   const playScannedSfx = () => {
@@ -52,14 +52,11 @@ export default function App() {
     <div className="app row">
       <audio ref={scannedSfx} src="/sfx/zero-one.mp3" preload="auto" />
       <div className="row">
-        <button
-          className="btn btn-gray"
-          onClick={backHome}>
+        <button className="btn btn-gray" onClick={backHome}>
           CLEAR
         </button>
         {!enabled && (
-          <button className="btn btn-blue"
-            onClick={startKiosk}>
+          <button className="btn btn-blue" onClick={startKiosk}>
             Enable NFC Kiosk Mode
           </button>
         )}
@@ -73,7 +70,9 @@ export default function App() {
             placeholder="Card UID"
             className="input border py-1"
           />
-          <button className="btn btn-gray" onClick={submitCard}> Try </button>
+          <button className="btn btn-gray" onClick={submitCard}>
+            Try
+          </button>
         </div>
       )}
 
