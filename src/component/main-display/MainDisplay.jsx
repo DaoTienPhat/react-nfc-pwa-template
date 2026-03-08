@@ -29,14 +29,15 @@ const MainDisplay = ({ cardUid }) => {
 			audioRef.current.pause();
 			return;
 		}
+
 		const asset = tagMapData[cardUid.toUpperCase()] || tagMapData["DEFAULT"]
 		setScanned(`${cardUid} - ${asset.title}`);
 		asset.img && setImg(buildVercelUrl(asset.img));
 		if (asset.audio) {
 			audioRef.current.src = buildVercelUrl(asset.audio);
 			audioRef.current.play();
-		}
-		asset.video && setVideoSrc(buildVercelUrl(asset.video) || "");
+		} else audioRef.current.pause;
+		setVideoSrc(asset.video ? buildVercelUrl(asset.video) : "");
 	}, [cardUid, tagMapData]);
 
 	return (
